@@ -593,7 +593,7 @@ my most beautiful dream come true. ❤️</p><!-- REPLACE -->
          data-src="Media-Video/Wedding%20highlight%20video.mp4"
          data-caption="Wedding Highlights"
          onclick="openLB(this)">
-      <video src="Media-Video/Wedding%20highlight%20video.mp4" muted preload="metadata" style="width:100%;height:auto;display:block;pointer-events:none;"></video>
+      <img src="Media-Wedding/Magic%20in%20the%20air.jpeg" alt="Wedding Highlights" loading="lazy">
       <div class="g-play">▶</div>
       <div class="g-overlay"><span class="g-overlay-icon">▶</span><span class="g-overlay-label">Wedding Highlights</span></div>
     </div>
@@ -982,7 +982,9 @@ function renderLB() {
   } else if (type === 'youtube') {
     inner.innerHTML = `<div class="lb-vid"><iframe src="https://www.youtube.com/embed/${src}?autoplay=1&rel=0" allow="autoplay;encrypted-media" allowfullscreen></iframe></div>`;
   } else if (type === 'video') {
-    inner.innerHTML = `<div class="lb-vid"><video src="${src}" controls autoplay muted playsinline></video></div>`;
+    inner.innerHTML = `<div class="lb-vid"><video src="${src}" controls muted playsinline></video></div>`;
+    const vid = inner.querySelector('video');
+    if (vid) vid.play().catch(() => {});
   }
 }
 
