@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Journey Together ❤️</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<style>
+/* ==============================================
+   VARIABLES & RESET
+   ============================================== */
+:root {
+  --cream:      #fdf6f0;
+  --blush:      #f2c4ce;
+  --peach:      #f8dcc5;
+  --rose:       #e8a0b4;
+  --deep-rose:  #c4687a;
+  --gold:       #d4a853;
+  --gold-light: #f0d080;
+  --brown-dark: #3d2020;
+  --brown-mid:  #7a4444;
+  --brown-light:#b08080;
+  --white:      #ffffff;
+  --shadow:     rgba(196,104,122,0.15);
+  --ff-serif:   'Playfair Display', Georgia, serif;
+  --ff-script:  'Dancing Script', cursive;
+  --ff-sans:    'Lato', sans-serif;
+  --ease:       all 0.4s cubic-bezier(0.25,0.8,0.25,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-sans);background:var(--cream);color:var(--brown-dark);overflow-x:hidden;line-height:1.7}
+img{max-width:100%;height:auto;display:block}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--rose);border-radius:3px}
+
+/* ==============================================
+   NAVIGATION
+   ============================================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;transition:var(--ease)}
+.nav.scrolled{background:rgba(253,246,240,0.96);backdrop-filter:blur(12px);box-shadow:0 2px 24px var(--shadow);padding:.8rem 2.5rem}
+.nav-logo{font-family:var(--ff-script);font-size:2rem;color:var(--deep-rose)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.78rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--brown-mid);transition:color .3s}
+.nav-links a:hover{color:var(--deep-rose)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.nav-burger span{width:24px;height:2px;background:var(--brown-mid);border-radius:2px;transition:var(--ease)}
+
+/* mobile menu */
+#mobileMenu{display:none;position:fixed;inset:0;background:rgba(253,246,240,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.2rem}
+#mobileMenu a{font-family:var(--ff-serif);font-size:2rem;color:var(--brown-dark);transition:color .3s}
+#mobileMenu a:hover{color:var(--deep-rose)}
+.menu-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--brown-mid)}
+
+/* ==============================================
+   HERO
+   ============================================== */
+#hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{
+  position:absolute;inset:0;transform:scale(1.08);
+  /* ============================================================
+     REPLACE: Set your own hero image URL below.
+     ============================================================ */
+  background:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80') center/cover no-repeat;
+  transition:transform 12s ease
+}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(61,32,32,.18) 0%,rgba(61,32,32,.55) 100%)}
+/* ============================================================
+   REPLACE: To use a video background instead of image, uncomment
+   the <video> tag in the HTML and hide .hero-bg by adding
+   display:none to the .hero-bg rule above.
+   ============================================================ */
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.hero-content{position:relative;z-index:2;max-width:820px;padding:2rem}
+.hero-eyebrow{font-family:var(--ff-script);font-size:1.5rem;color:var(--gold-light);margin-bottom:.8rem;opacity:0;animation:fadeUp 1s forwards .5s}
+.hero-title{font-family:var(--ff-serif);font-size:clamp(2.6rem,8vw,5.5rem);font-weight:700;color:#fff;line-height:1.15;text-shadow:0 2px 24px rgba(61,32,32,.4);margin-bottom:1.4rem;opacity:0;animation:fadeUp 1s forwards .85s}
+.hero-sub{font-family:var(--ff-script);font-size:clamp(1.2rem,3vw,1.85rem);color:rgba(255,255,255,.92);margin-bottom:2.8rem;opacity:0;animation:fadeUp 1s forwards 1.2s}
+.hero-btn{display:inline-block;padding:1rem 2.8rem;background:transparent;border:2px solid rgba(255,255,255,.75);color:#fff;font-size:.82rem;letter-spacing:2.2px;text-transform:uppercase;border-radius:50px;cursor:pointer;transition:var(--ease);opacity:0;animation:fadeUp 1s forwards 1.5s;position:relative;overflow:hidden}
+.hero-btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.hero-btn:hover::before{transform:scaleX(1)}
+.hero-btn:hover{border-color:#fff;box-shadow:0 0 32px rgba(255,255,255,.25);transform:translateY(-3px)}
+.scroll-down{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:2;opacity:0;animation:fadeIn 1s forwards 2.2s;cursor:pointer}
+.scroll-down .arr{width:28px;height:28px;border-right:2px solid rgba(255,255,255,.7);border-bottom:2px solid rgba(255,255,255,.7);transform:rotate(45deg);animation:bounce 2s infinite;margin:auto}
+
+/* ==============================================
+   SHARED SECTION STYLES
+   ============================================== */
+section{padding:6rem 2rem}
+.section-head{text-align:center;margin-bottom:4rem}
+.eyebrow{font-family:var(--ff-script);font-size:1.3rem;color:var(--rose);display:block;margin-bottom:.4rem}
+.section-title{font-family:var(--ff-serif);font-size:clamp(1.9rem,5vw,3rem);color:var(--brown-dark);margin-bottom:.8rem}
+.divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:.8rem auto}
+.divider::before,.divider::after{content:'';height:1px;width:60px;background:linear-gradient(to right,transparent,var(--gold))}
+.divider::after{background:linear-gradient(to left,transparent,var(--gold))}
+.divider span{color:var(--gold);font-size:1.1rem}
+.section-sub{font-size:.95rem;color:var(--brown-light);max-width:500px;margin:.4rem auto 0;font-style:italic}
+
+/* ==============================================
+   TIMELINE
+   ============================================== */
+#timeline{background:#fff;position:relative}
+#timeline::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(to right,var(--peach),var(--rose),var(--gold),var(--rose),var(--peach))}
+.tl-wrap{max-width:1020px;margin:0 auto;position:relative}
+.tl-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--blush),var(--rose),var(--blush));transform:translateX(-50%)}
+.tl-item{display:flex;justify-content:flex-end;padding-right:calc(50% + 3rem);margin-bottom:4rem;position:relative}
+.tl-item:nth-child(even){justify-content:flex-start;padding-right:0;padding-left:calc(50% + 3rem)}
+.tl-dot{position:absolute;left:50%;top:1.6rem;transform:translateX(-50%);width:16px;height:16px;background:var(--deep-rose);border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 3px var(--rose);z-index:2;transition:transform .3s}
+.tl-item:hover .tl-dot{transform:translateX(-50%) scale(1.5)}
+.tl-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 28px var(--shadow);max-width:420px;width:100%;transition:var(--ease)}
+.tl-card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(196,104,122,.28)}
+.tl-img-wrap{overflow:hidden;position:relative}
+/* REPLACE: Timeline images are set via src on <img> tags below */
+.tl-img{width:100%;height:220px;object-fit:cover;transition:transform .6s ease;display:block}
+.tl-card:hover .tl-img{transform:scale(1.06)}
+.tl-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(61,32,32,.5) 0%,transparent 55%);opacity:0;transition:opacity .4s}
+.tl-card:hover .tl-img-overlay{opacity:1}
+.tl-body{padding:1.4rem 1.6rem}
+.tl-date{font-family:var(--ff-script);font-size:1rem;color:var(--rose);margin-bottom:.3rem}
+.tl-heading{font-family:var(--ff-serif);font-size:1.25rem;color:var(--brown-dark);margin-bottom:.4rem}
+.tl-text{font-size:.88rem;color:var(--brown-light);line-height:1.75}
+.tl-vid-btn{margin-top:.9rem;display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1.1rem;background:linear-gradient(135deg,var(--blush),var(--rose));color:#fff;border:none;border-radius:50px;font-size:.78rem;cursor:pointer;transition:var(--ease)}
+.tl-vid-btn:hover{background:linear-gradient(135deg,var(--rose),var(--deep-rose));transform:translateY(-2px)}
+
+/* ==============================================
+   GALLERY
+   ============================================== */
+#gallery{background:var(--cream)}
+.gallery-grid{columns:3;column-gap:1rem;max-width:1200px;margin:0 auto}
+.g-item{break-inside:avoid;margin-bottom:1rem;position:relative;cursor:pointer;border-radius:14px;overflow:hidden}
+.g-item img{width:100%;height:auto;display:block;transition:transform .5s ease}
+.g-item:hover img{transform:scale(1.05)}
+.g-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(61,32,32,.78) 0%,rgba(61,32,32,.08) 65%,transparent 100%);opacity:0;transition:opacity .4s;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:1.2rem 1rem;border-radius:14px;gap:.4rem}
+.g-item:hover .g-overlay{opacity:1}
+.g-romantic-icons{font-size:1.1rem;letter-spacing:.35rem;transform:translateY(8px);opacity:0;transition:transform .4s ease .12s,opacity .4s ease .12s}
+.g-item:hover .g-romantic-icons{transform:translateY(0);opacity:1}
+.g-overlay-label{color:#fff;font-family:var(--ff-script);font-size:1.25rem;text-shadow:0 1px 10px rgba(0,0,0,.4);text-align:center;transform:translateY(5px);opacity:0;transition:transform .35s ease,opacity .35s ease}
+.g-item:hover .g-overlay-label{transform:translateY(0);opacity:1}
+.g-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,.88);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--deep-rose);transition:var(--ease)}
+.g-item:hover .g-play{transform:translate(-50%,-50%) scale(1.12);background:#fff}
+
+/* ==============================================
+   BABY & FAMILY
+   ============================================== */
+#family{background:linear-gradient(135deg,#fff5f0 0%,#fef0f5 100%)}
+.fam-grid{display:flex;flex-wrap:wrap;gap:1.5rem;max-width:1200px;margin:0 auto;justify-content:center}
+.fam-card{flex:0 0 calc(33.333% - 1rem);min-width:260px;max-width:380px;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px var(--shadow);background:#fff;transition:var(--ease);cursor:pointer}
+.fam-card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(196,104,122,.28)}
+.fam-media{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--cream)}
+.fam-media img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .6s ease}
+.fam-card:hover .fam-media img{transform:scale(1.08)}
+.fam-body{padding:1.2rem 1.5rem}
+.fam-title{font-family:var(--ff-serif);font-size:1.1rem;color:var(--brown-dark);margin-bottom:.25rem}
+.fam-text{font-size:.84rem;color:var(--brown-light);font-style:italic}
+.fam-seeall-overlay{position:absolute;inset:0;background:rgba(61,32,32,.48);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .35s}
+.fam-card:hover .fam-seeall-overlay{opacity:1}
+.fam-seeall-overlay span{color:#fff;font-family:var(--ff-script);font-size:1.45rem;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+.fam-photo-count{position:absolute;top:.75rem;right:.75rem;background:rgba(0,0,0,.52);color:#fff;border-radius:50px;padding:.22rem .75rem;font-size:.75rem;font-family:var(--ff-sans);backdrop-filter:blur(4px);z-index:3;letter-spacing:.5px}
+
+/* ==============================================
+   HIGHLIGHT VIDEO
+   ============================================== */
+#highlight{background:var(--brown-dark);padding:5rem 2rem;text-align:center}
+#highlight .section-title{color:#fff}
+#highlight .eyebrow{color:var(--gold-light)}
+#highlight .section-sub{color:rgba(255,255,255,.55)}
+.vid-wrapper{max-width:920px;margin:0 auto;border-radius:22px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+.yt-embed{width:100%;aspect-ratio:16/9}
+.yt-embed iframe{width:100%;height:100%;border:none;display:block}
+/* REPLACE: Local video alternative — see comment in HTML */
+.local-vid-wrap video{width:100%;display:block}
+
+/* ==============================================
+   SLIDESHOW
+   ============================================== */
+#slideshow{background:#fff;padding:5rem 0 0;overflow:hidden}
+#slideshow .section-head{padding:0 2rem}
+.swiper{width:100%;padding:1rem 0 2.5rem!important;min-height:400px}
+.swiper-slide{border-radius:16px;overflow:hidden;box-shadow:0 8px 30px var(--shadow);position:relative;height:360px}
+.swiper-slide img{width:100%;height:100%!important;object-fit:cover;object-position:center;display:block}
+.slide-caption{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.5rem 1.4rem;background:linear-gradient(to top,rgba(61,32,32,.8),transparent);color:#fff}
+.slide-caption span{font-family:var(--ff-script);font-size:1.45rem}
+.swiper-pagination-bullet{background:var(--rose)!important;opacity:.5}
+.swiper-pagination-bullet-active{opacity:1!important}
+.swiper-button-next,.swiper-button-prev{color:var(--rose)!important}
+
+/* ==============================================
+   LOVE LETTER
+   ============================================== */
+#love-letter{background:linear-gradient(135deg,#fff9f0,#fef5f7);position:relative;overflow:hidden}
+#love-letter::before{content:'♥';position:absolute;font-size:22rem;color:rgba(242,196,206,.1);right:-3rem;top:50%;transform:translateY(-50%);line-height:1;pointer-events:none}
+.letter-wrap{max-width:720px;margin:0 auto;background:#fff;padding:3.5rem 4rem;border-radius:22px;box-shadow:0 10px 50px var(--shadow);position:relative;border:1px solid rgba(242,196,206,.35)}
+.letter-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,var(--peach),var(--rose),var(--gold),var(--rose),var(--peach));border-radius:22px 22px 0 0}
+.letter-seal{position:absolute;top:-22px;right:2.5rem;width:52px;height:52px;background:linear-gradient(135deg,var(--rose),var(--deep-rose));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 16px rgba(196,104,122,.4)}
+.letter-dear{font-family:var(--ff-script);font-size:1.9rem;color:var(--deep-rose);margin-bottom:1.4rem}
+/* REPLACE: Edit the letter body text between the <p> tags in the HTML */
+.letter-body{font-family:var(--ff-script);font-size:1.2rem;color:var(--brown-mid);line-height:2.1;opacity:0;transform:translateY(20px);transition:opacity 1.5s ease,transform 1.5s ease}
+.letter-body.visible{opacity:1;transform:translateY(0)}
+.letter-sign{margin-top:2rem;text-align:right;font-family:var(--ff-script);font-size:1.6rem;color:var(--deep-rose)}
+
+/* ==============================================
+   MUSIC BUTTON (commented out — uncomment to enable)
+   ============================================== */
+/*
+#music-btn{position:fixed;bottom:2rem;right:2rem;z-index:1000;width:52px;height:52px;background:linear-gradient(135deg,var(--rose),var(--deep-rose));border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(196,104,122,.5);border:none;color:#fff;font-size:1.3rem;transition:var(--ease)}
+#music-btn:hover{transform:scale(1.12);box-shadow:0 6px 30px rgba(196,104,122,.7)}
+#music-btn.playing{animation:pulse 2s infinite}
+*/
+
+/* ==============================================
+   FOOTER
+   ============================================== */
+#footer{background:var(--brown-dark);padding:5rem 2rem;text-align:center;position:relative;overflow:hidden}
+#footer::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,var(--peach),var(--rose),var(--gold),var(--rose),var(--peach))}
+.footer-heart{font-size:3rem;display:block;margin-bottom:1.4rem;animation:heartbeat 1.5s infinite}
+.footer-title{font-family:var(--ff-script);font-size:clamp(2rem,5vw,3.2rem);color:var(--blush);margin-bottom:.8rem}
+.footer-quote{font-family:var(--ff-serif);font-style:italic;font-size:.95rem;color:rgba(255,255,255,.45);margin-bottom:2.2rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8}
+.counter-box{display:inline-block;background:rgba(255,255,255,.05);border:1px solid rgba(242,196,206,.2);border-radius:18px;padding:1.5rem 3.5rem;margin-bottom:2rem}
+.counter-label{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.4rem}
+.counter-num{font-family:var(--ff-serif);font-size:2.8rem;color:var(--gold-light);margin-bottom:.25rem}
+.counter-since{font-family:var(--ff-script);font-size:1.05rem;color:var(--rose)}
+.footer-close{font-family:var(--ff-script);font-size:1.1rem;color:rgba(255,255,255,.28);margin-top:.5rem}
+
+/* ==============================================
+   LIGHTBOX
+   ============================================== */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:10000;align-items:center;justify-content:center;padding:1rem}
+.lightbox.open{display:flex}
+.lb-content{position:relative;max-width:92vw;max-height:92vh;display:flex;align-items:center;justify-content:center}
+.lb-content img{max-width:100%;max-height:88vh;object-fit:contain;border-radius:8px;box-shadow:0 0 60px rgba(196,104,122,.25)}
+.lb-vid{width:min(90vw,920px);aspect-ratio:16/9}
+.lb-vid iframe,.lb-vid video{width:100%;height:100%;border-radius:8px;border:none}
+.lb-close{position:absolute;top:-2.8rem;right:0;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;opacity:.7;transition:opacity .3s}
+.lb-close:hover{opacity:1}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;transition:var(--ease)}
+.lb-nav:hover{background:rgba(255,255,255,.25)}
+.lb-prev{left:-3.5rem}
+.lb-next{right:-3.5rem}
+.lb-caption{position:absolute;bottom:-2.8rem;left:0;right:0;text-align:center;color:rgba(255,255,255,.55);font-family:var(--ff-script);font-size:1.05rem}
+
+/* Video popup modal (timeline) */
+.vmodal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:10000;align-items:center;justify-content:center}
+.vmodal.open{display:flex}
+.vmodal-inner{position:relative;width:min(90vw,820px)}
+.vmodal-close{position:absolute;top:-2.8rem;right:0;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer}
+.vmodal-frame{width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden}
+.vmodal-frame iframe,.vmodal-frame video{width:100%;height:100%;border:none}
+
+/* Floating hearts */
+.hearts-wrap{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}
+.fheart{position:absolute;bottom:-50px;animation:floatHeart linear infinite;opacity:0}
+
+/* ==============================================
+   KEYFRAMES
+   ============================================== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(7px)}}
+@keyframes floatHeart{
+  0%{opacity:0;bottom:-50px;transform:translateX(0) rotate(0deg)}
+  8%{opacity:.85}
+  92%{opacity:.6}
+  100%{opacity:0;bottom:110vh;transform:translateX(var(--drift)) rotate(var(--spin))}
+}
+@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.22)}28%{transform:scale(1)}42%{transform:scale(1.14)}56%{transform:scale(1)}}
+@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(196,104,122,.5)}50%{box-shadow:0 4px 40px rgba(196,104,122,.85),0 0 0 8px rgba(196,104,122,.1)}}
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .tl-line{left:1.4rem}
+  .tl-item,.tl-item:nth-child(even){padding:0 0 0 3.8rem;justify-content:flex-start}
+  .tl-dot,.tl-item:nth-child(even) .tl-dot{left:1.4rem}
+  .tl-card{max-width:100%}
+  .gallery-grid{columns:2}
+  .fam-card{flex:0 0 calc(50% - .75rem);max-width:unset}
+  .letter-wrap{padding:2rem 1.5rem}
+  .lb-prev{left:-1.5rem}.lb-next{right:-1.5rem}
+  .swiper-slide{height:280px}
+}
+@media(max-width:480px){
+  .gallery-grid{columns:1}
+  .fam-card{flex:0 0 100%;min-width:unset;max-width:unset}
+  section{padding:4rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating hearts layer -->
+<div class="hearts-wrap" id="heartsWrap"></div>
+
+<!-- ============================================================
+     BACKGROUND MUSIC (commented out — uncomment to enable)
+     REPLACE: Swap the <source src="..."> with your own MP3 path,
+     e.g. <source src="music/our-song.mp3" type="audio/mpeg">
+     ============================================================ -->
+<!--
+<audio id="bgMusic" loop preload="none">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
+</audio>
+
+<button id="music-btn" title="Toggle Music" aria-label="Toggle music">🎵</button>
+-->
+
+<!-- ============================================================
+     NAVIGATION
+     REPLACE: Change "A & S" to your own initials or name.
+     ============================================================ -->
+<nav class="nav" id="mainNav">
+  <span class="nav-logo">Shab❤️Afzu</span>
+  <ul class="nav-links">
+    <li><a href="#timeline">Our Story</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#family">Family</a></li>
+    <li><a href="#highlight">Memories</a></li>
+    <li><a href="#love-letter">Letter</a></li>
+  </ul>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div id="mobileMenu">
+  <button class="menu-close" id="menuClose">✕</button>
+  <a href="#timeline">Our Story</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#family">Family</a>
+  <a href="#highlight">Memories</a>
+  <a href="#love-letter">Letter</a>
+</div>
+
+<!-- ============================================================
+     HERO SECTION
+     REPLACE:
+       - .hero-bg background-image URL (in CSS above)
+       - hero-eyebrow text
+       - hero-title text
+       - hero-sub text
+       - hero-btn text
+     OPTIONAL: Uncomment <video> tag for a video background.
+     ============================================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <!-- REPLACE: Uncomment for video background; also set .hero-bg {display:none} in CSS
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="YOUR_VIDEO.mp4" type="video/mp4">
+  </video>
+  -->
+  <div class="hero-content">
+    <!-- REPLACE: Short tagline above title -->
+    <p class="hero-eyebrow">A love story written in the stars ✨</p>
+    <!-- REPLACE: Main title -->
+    <h1 class="hero-title">Our Journey Together ❤️</h1>
+    <!-- REPLACE: Romantic subtitle -->
+    <p class="hero-sub">Every moment with you is a chapter I never want to end, my love.</p>
+    <a href="#timeline" class="hero-btn">Begin Our Story</a>
+  </div>
+  <div class="scroll-down" onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})">
+    <div class="arr"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TIMELINE SECTION
+     REPLACE for each milestone:
+       - tl-date:    your real date
+       - tl-heading: milestone title
+       - tl-text:    description
+       - <img src>:  your own photo URL
+     OPTIONAL: Uncomment tl-vid-btn and pass your YouTube video ID
+     ============================================================ -->
+<section id="timeline">
+  <div class="section-head" data-aos="fade-up">
+    <span class="eyebrow">Chapter One</span>
+    <h2 class="section-title">Our Love Story</h2>
+    <div class="divider"><span>❤</span></div>
+    <p class="section-sub">Every love story is beautiful, but ours is my favourite</p>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-line"></div>
+
+    <!-- MILESTONE 1 -->
+    <div class="tl-item" data-aos="fade-right">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-img-wrap">
+          <!-- REPLACE: Your photo -->
+          <img class="tl-img" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=80" alt="First meeting" loading="lazy">
+          <div class="tl-img-overlay"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-date">August 8, 2020</div><!-- REPLACE date -->
+          <h3 class="tl-heading">The First Time I Noticed You ❤️</h3><!-- REPLACE -->
+          <p class="tl-text">I still remember the first time I saw you…though you may not even remember it, because we never spoke that day.
+          But something about you stayed in my mind.Then after a long time, we met again.This time, we talked… we laughed… and even took a picture together.
+          And that’s when something changed.I don’t know what it was…but I felt like I wanted to be around you more.I loved your company.
+          At that time, I was already in a relationship…but still, my heart kept pulling me towards you.
+          I didn’t understand it back then…whether it was love at first sight…or just a feeling that I wanted someone like you in my life.
+         All I knew was…something about you felt different. ❤️</p><!-- REPLACE -->
+          <!-- OPTIONAL: Uncomment and add your YouTube ID or local video path
+          <button class="tl-vid-btn" onclick="openVModal('YOUR_YOUTUBE_ID')">▶ Watch the Moment</button> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MILESTONE 2 -->
+    <div class="tl-item" data-aos="fade-left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-img-wrap">
+          <!-- REPLACE: Your photo -->
+          <img class="tl-img" src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=600&q=80" alt="First date" loading="lazy">
+          <div class="tl-img-overlay"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-date">August 16, 2022</div><!-- REPLACE -->
+          <h3 class="tl-heading">When My Heart Finally Spoke ❤️</h3><!-- REPLACE -->
+          <p class="tl-text">There was always something special about us… something I couldn’t quite explain at first.Somewhere between our conversations, our laughter, and the moments we shared…
+                             I fell for you.I tried to tell you many times, but you gently stopped me—afraid that love might change our friendship.
+                             But what I feel for you was never something temporary…It stayed, it grew, and it became a part of who I am.
+                             So today, I’m taking that step…Not to change what we have, but to make it even more beautiful.I choose you—today, tomorrow, and always.❤️</p><!-- REPLACE -->
+        </div>
+      </div>
+    </div>
+
+        <!-- MILESTONE 2 -->
+    <div class="tl-item" data-aos="fade-left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-img-wrap">
+          <!-- REPLACE: Your photo -->
+          <img class="tl-img" src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=600&q=80" alt="First date" loading="lazy">
+          <div class="tl-img-overlay"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-date">December 4, 2022</div><!-- REPLACE -->
+          <h3 class="tl-heading">A Drive, A Dream, and You ❤️</h3><!-- REPLACE -->
+          <p class="tl-text">I know what you might be thinking… we had already gone out together so many times before.
+           But this day was different. This day was special to me. Not that the others weren’t —
+            I have countless memories with you. Honestly, it’s hard to choose just one…
+            maybe you understand 😄 I wanted to take you somewhere… just the two of us. So while you were on your trip, I learned how to drive a car… just for you. And when you came back, I finally took you on that long drive. That day… is something I will never forget. I had always dreamed of going on a long drive with the person I love the most.
+          And Allah didn’t just fulfill that dream…He gave me you. ❤️</p><!-- REPLACE -->
+        </div>
+      </div>
+    </div>
+  
+    <!-- MILESTONE 3: Engagement -->
+    <div class="tl-item" data-aos="fade-right">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-img-wrap">
+          <!-- REPLACE: Your photo -->
+          <img class="tl-img" src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80" alt="Engagement" loading="lazy">
+          <div class="tl-img-overlay"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-date">February 15, 2023</div><!-- REPLACE -->
+          <h3 class="tl-heading">You Said Yes 💍</h3><!-- REPLACE -->
+          <p class="tl-text">Finally… the day came
+the one I had been waiting for.
+
+And honestly…
+I still don’t have the right words for that moment.
+
+Because what I felt…
+can’t be explained, only felt.
+
+When you said yes…
+you didn’t just accept my proposal,
+you gave me a happiness I had never known before.
+
+In that moment,
+I felt like the luckiest person in the world.
+
+I had you…
+and suddenly, I needed nothing else. ❤️</p><!-- REPLACE -->
+          <!-- <button class="tl-vid-btn" onclick="openVModal('YOUR_YOUTUBE_ID')">▶ Relive the Moment</button> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MILESTONE 4: Wedding -->
+    <div class="tl-item" data-aos="fade-left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-img-wrap">
+          <!-- REPLACE: Your photo -->
+          <img class="tl-img" src="https://images.unsplash.com/photo-1525772764200-be829a350797?w=600&q=80" alt="Wedding" loading="lazy">
+          <div class="tl-img-overlay"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-date">May 13, 2023</div><!-- REPLACE -->
+          <h3 class="tl-heading">The Day We Became One👰</h3><!-- REPLACE -->
+          <p class="tl-text">Seeing you walk towards me…
+felt like time itself had stopped.
+
+In that moment, nothing else mattered —
+it was just you and me.
+
+You took my breath away in a way
+I will never be able to explain.
+
+And when I said “Alhumdulliah”…
+I meant it with every part of my heart and soul.
+
+That wasn’t just a promise for that day…
+it was a promise for every tomorrow.
+
+You are not just my love…
+you are my greatest adventure,
+my most beautiful dream come true. ❤️</p><!-- REPLACE -->
+          <!-- <button class="tl-vid-btn" onclick="openVModal('YOUR_YOUTUBE_ID')">▶ Watch Highlights</button> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MILESTONE 5: Travel -->
+    <div class="tl-item" data-aos="fade-right">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-img-wrap">
+          <!-- REPLACE: Your photo -->
+          <img class="tl-img" src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=600&q=80" alt="Travels" loading="lazy">
+          <div class="tl-img-overlay"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-date">May 18 2023</div><!-- REPLACE -->
+          <h3 class="tl-heading">Exploring the World Together ✈️</h3><!-- REPLACE -->
+          <p class="tl-text">Every place is more beautiful through your eyes. Our honeymoon was a dream — new places, new memories, and always your hand in mine. Adventure is always better with you.</p><!-- REPLACE -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MILESTONE 6: Baby -->
+    <div class="tl-item" data-aos="fade-left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-img-wrap">
+          <!-- REPLACE: Your photo -->
+          <img class="tl-img" src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80" alt="Baby" loading="lazy">
+          <div class="tl-img-overlay"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-date">July 10, 2024</div><!-- REPLACE -->
+          <h3 class="tl-heading">Our Little Miracle 👶</h3><!-- REPLACE: add baby name -->
+          <p class="tl-text">The day you became a mother was the day I fell in love with you all over again. Watching you hold our baby for the first time — that image is forever etched in my heart.</p><!-- REPLACE -->
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end tl-wrap -->
+</section>
+
+<!-- ============================================================
+     WEDDING GALLERY
+     REPLACE for each item:
+       - data-src:     full-size URL (opens in lightbox)
+       - data-caption: caption text
+       - <img src>:    thumbnail URL
+     For video items, set data-type="youtube" and data-src="VIDEO_ID"
+     or data-type="video" and data-src="path/to/video.mp4"
+     ============================================================ -->
+<section id="gallery">
+  <div class="section-head" data-aos="fade-up">
+    <span class="eyebrow">Captured Forever</span>
+    <h2 class="section-title">Wedding Gallery</h2>
+    <div class="divider"><span>✦</span></div>
+    <p class="section-sub">Every picture holds a piece of our story</p>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+
+    <div class="g-item" data-aos="fade-up">
+      <img src="Media-Wedding/WhatsApp%20Image%202026-04-21%20at%205.28.30%20PM.jpeg" alt="Wedding" loading="lazy">
+      <div class="g-overlay"><span class="g-romantic-icons">❤️ ✨ ⭐</span><span class="g-overlay-label">Our Wedding</span></div>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="80">
+      <img src="Media-Wedding/First%20Kiss.jpeg" alt="The first kiss" loading="lazy">
+      <div class="g-overlay"><span class="g-romantic-icons">❤️ ✨ ⭐</span><span class="g-overlay-label">The first kiss</span></div>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="160"
+         data-type="video"
+         data-src="Media-Video/Wedding%20highlight%20video.mp4"
+         data-caption="Wedding Highlights"
+         onclick="openLB(this)">
+      <video src="Media-Video/Wedding%20highlight%20video.mp4" muted preload="metadata" style="width:100%;height:auto;display:block;pointer-events:none;"></video>
+      <div class="g-play">▶</div>
+      <div class="g-overlay"><span class="g-overlay-icon">▶</span><span class="g-overlay-label">Wedding Highlights</span></div>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="60">
+      <img src="Media-Wedding/just%20married.jpeg" alt="Just married" loading="lazy">
+      <div class="g-overlay"><span class="g-romantic-icons">❤️ ✨ ⭐</span><span class="g-overlay-label">Just married</span></div>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="120">
+      <img src="Media-Wedding/our%20view.jpeg" alt="Our View" loading="lazy">
+      <div class="g-overlay"><span class="g-romantic-icons">❤️ ✨ ⭐</span><span class="g-overlay-label">Our View</span></div>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="40">
+      <img src="Media-Wedding/Celebration%20Love.jpeg" alt="Celebrating love" loading="lazy">
+      <div class="g-overlay"><span class="g-romantic-icons">❤️ ✨ ⭐</span><span class="g-overlay-label">Celebrating love</span></div>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="100">
+      <img src="Media-Wedding/Magic%20in%20the%20air.jpeg" alt="Magic in the air" loading="lazy">
+      <div class="g-overlay"><span class="g-romantic-icons">❤️ ✨ ⭐</span><span class="g-overlay-label">Magic in the air</span></div>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="180">
+      <img src="Media-Wedding/perfect%20day.jpeg" alt="A perfect day" loading="lazy">
+      <div class="g-overlay"><span class="g-romantic-icons">❤️ ✨ ⭐</span><span class="g-overlay-label">A perfect day</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     BABY & FAMILY SECTION
+     REPLACE for each card: <img src>, fam-title, fam-text,
+     data-src (lightbox full-size), data-caption
+     ============================================================ -->
+<section id="family">
+  <div class="section-head" data-aos="fade-up">
+    <span class="eyebrow">Our Greatest Joy</span>
+    <h2 class="section-title">Baby &amp; Family Moments</h2>
+    <div class="divider"><span>🌸</span></div>
+    <p class="section-sub">The most beautiful chapter of our story</p><!-- REPLACE -->
+  </div>
+  <div class="fam-grid">
+
+    <!-- Card 1: First Moments — click opens all 12 photos in sequence -->
+    <div class="fam-card" data-aos="fade-up"
+         onclick="openFirstMoments()" style="cursor:pointer">
+      <div class="fam-media">
+        <img src="Media-FirstMoment/Just%20Born.jpeg" alt="First Moments" loading="lazy">
+        <div class="fam-photo-count">📷 12 photos</div>
+        <div class="fam-seeall-overlay"><span>See All Photos →</span></div>
+      </div>
+      <div class="fam-body">
+        <h3 class="fam-title">First Moments</h3>
+        <p class="fam-text">You made me a father — the greatest gift of all.</p>
+      </div>
+    </div>
+
+    <!-- Card 2: Growing So Fast — click opens all 15 photos in lightbox -->
+    <div class="fam-card" data-aos="fade-up" data-aos-delay="100"
+         onclick="openGrowingFast()" style="cursor:pointer">
+      <div class="fam-media">
+        <img src="Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.07%20PM%20(1).jpeg" alt="Growing So Fast" loading="lazy">
+        <div class="fam-photo-count">📷 15 photos</div>
+        <div class="fam-seeall-overlay"><span>See All Photos →</span></div>
+      </div>
+      <div class="fam-body">
+        <h3 class="fam-title">Growing So Fast</h3>
+        <p class="fam-text">Every day a new surprise, every smile a treasure · tap to browse all</p>
+      </div>
+    </div>
+
+    <!-- Card 4: Pure Joy — click opens all 28 photos in lightbox -->
+    <div class="fam-card" data-aos="fade-up"
+         onclick="openPureJoy()" style="cursor:pointer">
+      <div class="fam-media">
+        <img src="Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.55%20PM.jpeg" alt="Pure Joy" loading="lazy">
+        <div class="fam-photo-count">📷 28 photos</div>
+        <div class="fam-seeall-overlay"><span>See All Photos →</span></div>
+      </div>
+      <div class="fam-body">
+        <h3 class="fam-title">Pure Joy</h3>
+        <p class="fam-text">Your laugh is the best sound in the world · tap to browse all</p>
+      </div>
+    </div>
+
+    <!-- Card 5: Little Adventures — click opens all 17 photos in lightbox -->
+    <div class="fam-card" data-aos="fade-up" data-aos-delay="100"
+         onclick="openLittleAdventures()" style="cursor:pointer">
+      <div class="fam-media">
+        <img src="Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.55%20PM%20(2).jpeg" alt="Little Adventures" loading="lazy">
+        <div class="fam-photo-count">📷 17 photos</div>
+        <div class="fam-seeall-overlay"><span>See All Photos →</span></div>
+      </div>
+      <div class="fam-body">
+        <h3 class="fam-title">Little Adventures</h3>
+        <p class="fam-text">Seeing the world through tiny, wondering eyes · </p>
+      </div>
+    </div>
+
+    <!-- Card 6: Our Perfect Family — click opens all 11 photos in lightbox -->
+    <div class="fam-card" data-aos="fade-up" data-aos-delay="200"
+         onclick="openPerfectFamily()" style="cursor:pointer">
+      <div class="fam-media">
+        <img src="Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.39%20PM.jpeg" alt="Our Perfect Family" loading="lazy">
+        <div class="fam-photo-count">📷 11 photos</div>
+        <div class="fam-seeall-overlay"><span>See All Photos →</span></div>
+      </div>
+      <div class="fam-body">
+        <h3 class="fam-title">Our Perfect Family</h3>
+        <p class="fam-text">Everything I ever dreamed of, and more · tap to browse all</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     HIGHLIGHT VIDEO SECTION
+     REPLACE: Change the YouTube embed src — swap the video ID
+     (the part after /embed/) with your own YouTube video ID.
+
+     OR for a local video file, comment out the .yt-embed div
+     and uncomment the .local-vid-wrap div below it.
+     ============================================================ -->
+<section id="highlight">
+  <div class="section-head" data-aos="fade-up">
+    <span class="eyebrow">A Film of Our Love</span>
+    <h2 class="section-title">Our Beautiful Memories</h2>
+    <div class="divider" style="--gold:rgba(212,168,83,.75)"><span>✦</span></div>
+    <p class="section-sub">Every frame tells our story</p><!-- REPLACE -->
+  </div>
+  <div class="vid-wrapper" data-aos="zoom-in">
+
+    <!-- OPTION A: YouTube — commented out
+    <div class="yt-embed">
+      <iframe
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1&color=white"
+        title="Our Beautiful Memories"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    -->
+
+    <!-- OPTION B: Local video -->
+    <div class="local-vid-wrap">
+      <video controls playsinline
+             style="width:100%;display:block;border-radius:22px;">
+        <source src="Media-Video/WhatsApp%20Video%202026-04-27%20at%208.50.10%20PM.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDESHOW SECTION
+     REPLACE: For each .swiper-slide, update <img src> and
+     the <span> caption text inside .slide-caption
+     ============================================================ -->
+<section id="slideshow">
+  <div class="section-head" data-aos="fade-up">
+    <span class="eyebrow">Moments in Time</span>
+    <h2 class="section-title">Our Favourite Memories</h2>
+    <div class="divider"><span>✦</span></div>
+  </div>
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide">
+        <img src="Media-memory/WhatsApp%20Image%202026-04-24%20at%204.42.15%20PM.jpeg" alt="Our memory" loading="lazy">
+      </div>
+
+      <div class="swiper-slide">
+        <img src="Media-memory/WhatsApp%20Image%202026-04-27%20at%209.33.43%20PM.jpeg" alt="Our memory" loading="lazy">
+      </div>
+
+      <div class="swiper-slide">
+        <img src="Media-memory/WhatsApp%20Image%202026-04-27%20at%209.54.21%20PM.jpeg" alt="Our memory" loading="lazy">
+      </div>
+
+      <div class="swiper-slide">
+        <img src="Media-memory/WhatsApp%20Image%202026-04-27%20at%209.57.59%20PM.jpeg" alt="Our memory" loading="lazy">
+      </div>
+
+      <div class="swiper-slide">
+        <img src="Media-memory/WhatsApp%20Image%202026-04-27%20at%209.59.06%20PM.jpeg" alt="Our memory" loading="lazy">
+      </div>
+
+      <div class="swiper-slide">
+        <img src="Media-memory/new%20image.jpeg" alt="Our memory" loading="lazy">
+      </div>
+
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LOVE LETTER SECTION
+     REPLACE: Edit every line inside .letter-body with your own
+     heartfelt message. Update .letter-dear and .letter-sign too.
+     ============================================================ -->
+<section id="love-letter">
+  <div class="section-head" data-aos="fade-up">
+    <span class="eyebrow">From my heart to yours</span>
+    <h2 class="section-title">A Letter for You</h2>
+    <div class="divider"><span>❤</span></div>
+  </div>
+  <div class="letter-wrap" data-aos="fade-up" data-aos-delay="100">
+    <div class="letter-seal">💌</div>
+    <p class="letter-dear">My Dearest Love,</p><!-- REPLACE: name -->
+    <div class="letter-body" id="letterBody">
+      There are not enough words in any language to fully express what you mean to me. But I am going to try, because you deserve to know.
+      <br><br>
+      You are the first thought in my morning, and the last smile before I sleep. You are the reason I laugh louder, dream bigger, and love deeper than I ever thought possible.
+      <br><br>
+      Thank you for choosing me, every single day. Thank you for your patience, your warmth, your grace. Thank you for being the most incredible mother, the most wonderful partner, and my very best friend.
+      <br><br>
+      This website is just a small attempt to show you how much I treasure every memory we have made together. Every photo, every moment, every laugh and every tear — they are all precious to me.
+      <br><br>
+      Our story is not finished. I believe the best chapters are yet to come.
+      <br><br>
+      I love you more than yesterday, and I will love you more tomorrow.
+      <br><br>
+      Always and forever, yours.
+    </div><!-- END: replace letter body above -->
+    <div class="letter-sign">— Your Husband 💕</div><!-- REPLACE: your name -->
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     REPLACE:
+       - footer-title:   your names
+       - footer-quote:   your favourite quote
+       - counter-since:  your wedding date text
+       - footer-close:   closing line
+     Also update startDate in the JS below (search "REPLACE DATE").
+     ============================================================ -->
+<footer id="footer">
+  <span class="footer-heart">❤️</span>
+  <h2 class="footer-title">Together, Always</h2><!-- REPLACE: names -->
+  <p class="footer-quote">"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine." — Mohammed Afzal</p><!-- REPLACE: quote -->
+  <div class="counter-box">
+    <div class="counter-label">Days Together</div>
+    <div class="counter-num" id="dayCounter">0</div>
+    <div class="counter-since">Together since 13 may 2023</div><!-- REPLACE: your date -->
+  </div>
+  <p class="footer-close">Made with all my love, just for you. 🌹</p><!-- REPLACE -->
+</footer>
+
+<!-- ============================================================
+     LIGHTBOX MODAL
+     ============================================================ -->
+<div class="lightbox" id="lightbox" onclick="lbOverlayClick(event)">
+  <div class="lb-content">
+    <button class="lb-close" onclick="closeLB()">✕</button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)">&#8249;</button>
+    <button class="lb-nav lb-next" onclick="lbNav(1)">&#8250;</button>
+    <div id="lbInner"></div>
+    <div class="lb-caption" id="lbCaption"></div>
+  </div>
+</div>
+
+<!-- Timeline video popup -->
+<div class="vmodal" id="vmodal" onclick="vModalOverlay(event)">
+  <div class="vmodal-inner">
+    <button class="vmodal-close" onclick="closeVModal()">✕</button>
+    <div class="vmodal-frame" id="vmodalFrame"></div>
+  </div>
+</div>
+
+<!-- ==============================================
+     SCRIPTS
+     ============================================== -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// ---- AOS ----
+AOS.init({ duration:800, easing:'ease-out-cubic', once:true, offset:70 });
+
+// ---- Swiper ----
+new Swiper('.mySwiper', {
+  slidesPerView: 1.6, centeredSlides: true, spaceBetween: 16,
+  loop: true,
+  autoplay: { delay: 3800, disableOnInteraction: false },
+  speed: 900,
+  pagination: { el: '.swiper-pagination', clickable: true },
+  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+  breakpoints: {
+    640: { slidesPerView: 1.8, spaceBetween: 20 },
+    900: { slidesPerView: 3,   spaceBetween: 20 },
+    1200:{ slidesPerView: 3.5, spaceBetween: 20 }
+  }
+});
+
+// ---- Nav scroll ----
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 55));
+
+// ---- Mobile menu ----
+document.getElementById('burgerBtn').onclick = () => {
+  document.getElementById('mobileMenu').style.display = 'flex';
+};
+document.getElementById('menuClose').onclick = () => {
+  document.getElementById('mobileMenu').style.display = 'none';
+};
+document.querySelectorAll('#mobileMenu a').forEach(a =>
+  a.addEventListener('click', () => { document.getElementById('mobileMenu').style.display = 'none'; })
+);
+
+// ---- Hero parallax ----
+const heroBg = document.querySelector('.hero-bg');
+window.addEventListener('scroll', () => {
+  if (scrollY < innerHeight)
+    heroBg.style.transform = `scale(1.08) translateY(${scrollY * 0.28}px)`;
+});
+window.addEventListener('load', () => {
+  heroBg.style.transform = 'scale(1)';
+  heroBg.style.transition = 'transform 12s ease';
+});
+
+// ---- Floating hearts ----
+const hw = document.getElementById('heartsWrap');
+const HE = ['❤️','💕','💖','💗','🌹','✨','💓','🧡'];
+function mkHeart() {
+  const h = document.createElement('div');
+  h.className = 'fheart';
+  h.textContent = HE[Math.floor(Math.random()*HE.length)];
+  const dur = 9 + Math.random()*9, delay = Math.random()*4;
+  h.style.cssText = `left:${Math.random()*100}%;font-size:${.7+Math.random()*.9}rem;`+
+    `animation-duration:${dur}s;animation-delay:${delay}s;`+
+    `--drift:${(Math.random()-.5)*220}px;--spin:${Math.random()*360}deg`;
+  hw.appendChild(h);
+  setTimeout(() => h.remove(), (dur+delay)*1000);
+}
+setInterval(mkHeart, 2000);
+for (let i=0;i<6;i++) setTimeout(mkHeart, i*500);
+
+// ---- Sparkle on click ----
+const sparkleChars = ['✨','⭐','💫','🌟'];
+document.addEventListener('click', e => {
+  if (['BUTTON','A','INPUT'].includes(e.target.tagName)) return;
+  for (let i=0;i<5;i++) {
+    const s = document.createElement('span');
+    s.textContent = sparkleChars[Math.floor(Math.random()*4)];
+    const x = e.clientX+(Math.random()-.5)*50, y = e.clientY+(Math.random()-.5)*50;
+    s.style.cssText = `position:fixed;left:${x}px;top:${y}px;pointer-events:none;`+
+      `z-index:9999;font-size:${.9+Math.random()*.7}rem;`+
+      `animation:sparkleOut .7s forwards;`;
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(), 700);
+  }
+});
+
+// inject sparkleOut keyframe
+const kfStyle = document.createElement('style');
+kfStyle.textContent = '@keyframes sparkleOut{0%{opacity:1;transform:scale(0) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(180deg)}100%{opacity:0;transform:scale(.3) rotate(360deg) translateY(-30px)}}';
+document.head.appendChild(kfStyle);
+
+// ---- Lightbox ----
+let lbItems = [], lbIdx = 0;
+
+function openLB(el) {
+  const section = el.closest('section');
+  lbItems = Array.from(section.querySelectorAll('[data-src]'));
+  lbIdx = lbItems.indexOf(el);
+  renderLB();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderLB() {
+  const el = lbItems[lbIdx];
+  const type = el.dataset.type, src = el.dataset.src, cap = el.dataset.caption||'';
+  document.getElementById('lbCaption').textContent = cap;
+  const inner = document.getElementById('lbInner');
+  if (type === 'image') {
+    inner.innerHTML = `<img src="${src}" alt="${cap}">`;
+  } else if (type === 'youtube') {
+    inner.innerHTML = `<div class="lb-vid"><iframe src="https://www.youtube.com/embed/${src}?autoplay=1&rel=0" allow="autoplay;encrypted-media" allowfullscreen></iframe></div>`;
+  } else if (type === 'video') {
+    inner.innerHTML = `<div class="lb-vid"><video src="${src}" controls autoplay></video></div>`;
+  }
+}
+
+function lbNav(d) {
+  if (!lbItems.length) return;
+  lbIdx = (lbIdx+d+lbItems.length)%lbItems.length;
+  renderLB();
+}
+
+function closeLB() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lbInner').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+function lbOverlayClick(e) {
+  if (e.target === document.getElementById('lightbox')) closeLB();
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key==='Escape') closeLB();
+  if (e.key==='ArrowRight') lbNav(1);
+  if (e.key==='ArrowLeft') lbNav(-1);
+});
+
+// ---- Timeline video modal ----
+function openVModal(src) {
+  const frame = document.getElementById('vmodalFrame');
+  // Auto-detect YouTube ID (11 chars, alphanumeric + _-)
+  if (/^[a-zA-Z0-9_-]{11}$/.test(src)) {
+    frame.innerHTML = `<iframe src="https://www.youtube.com/embed/${src}?autoplay=1&rel=0" allow="autoplay;encrypted-media" allowfullscreen></iframe>`;
+  } else {
+    frame.innerHTML = `<video src="${src}" controls autoplay style="width:100%;height:100%;border-radius:14px"></video>`;
+  }
+  document.getElementById('vmodal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVModal() {
+  document.getElementById('vmodal').classList.remove('open');
+  document.getElementById('vmodalFrame').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+function vModalOverlay(e) {
+  if (e.target===document.getElementById('vmodal')) closeVModal();
+}
+
+// ---- Music (commented out — uncomment to enable) ----
+/*
+const audio = document.getElementById('bgMusic');
+const mBtn = document.getElementById('music-btn');
+let playing = false;
+
+mBtn.addEventListener('click', () => {
+  playing ? audio.pause() : audio.play().catch(()=>{});
+  playing = !playing;
+  mBtn.textContent = playing ? '⏸' : '🎵';
+  mBtn.classList.toggle('playing', playing);
+});
+
+// Auto-start on first user gesture
+document.addEventListener('click', function autoPlay() {
+  if (playing) return;
+  audio.volume = 0.3;
+  audio.play().then(() => {
+    playing = true;
+    mBtn.textContent = '⏸';
+    mBtn.classList.add('playing');
+  }).catch(()=>{});
+  document.removeEventListener('click', autoPlay);
+}, {once:true});
+*/
+
+// ---- Pure Joy gallery (28 photos) ----
+const pureJoyPhotos = [
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.55%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.43%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.43%20PM%20(2).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.43%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.44%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.44%20PM%20(2).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.44%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.45%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.46%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.46%20PM%20(2).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.46%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.47%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.47%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.48%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.48%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.49%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.49%20PM%20(2).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.49%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.50%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.50%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.51%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.51%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.52%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.52%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.53%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.54%20PM%20(1).jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.54%20PM.jpeg',
+  'Media-joy/WhatsApp%20Image%202026-04-27%20at%205.29.56%20PM.jpeg',
+];
+
+function openPureJoy() {
+  lbItems = pureJoyPhotos.map(src => ({
+    dataset: { type: 'image', src: src, caption: 'Pure Joy 😄' }
+  }));
+  lbIdx = 0;
+  renderLB();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ---- Our Perfect Family gallery (11 photos) ----
+const perfectFamilyPhotos = [
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.31%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.33%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.34%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.35%20PM%20(1).jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.35%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.36%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.37%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.38%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.39%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.41%20PM.jpeg',
+  'Media-Perfect/WhatsApp%20Image%202026-04-24%20at%2012.38.42%20PM.jpeg',
+];
+
+function openPerfectFamily() {
+  lbItems = perfectFamilyPhotos.map(src => ({
+    dataset: { type: 'image', src: src, caption: 'Our Perfect Family 💕' }
+  }));
+  lbIdx = 0;
+  renderLB();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ---- Growing So Fast gallery (15 photos) ----
+const growingFastPhotos = [
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.06%20PM%20(1).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.06%20PM.jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.07%20PM%20(1).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.07%20PM%20(2).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.07%20PM.jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.08%20PM%20(1).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.08%20PM%20(2).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.08%20PM.jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.09%20PM%20(1).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.09%20PM%20(2).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.09%20PM.jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.10%20PM%20(1).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.10%20PM.jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.11%20PM%20(1).jpeg',
+  'Media-Growing%20to%20fast/WhatsApp%20Image%202026-04-23%20at%206.12.11%20PM.jpeg',
+];
+
+function openGrowingFast() {
+  lbItems = growingFastPhotos.map(src => ({
+    dataset: { type: 'image', src: src, caption: 'Growing So Fast 💛' }
+  }));
+  lbIdx = 0;
+  renderLB();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ---- First Moments gallery (Just Born → 11 months, in sequence) ----
+const firstMomentPhotos = [
+  { src: 'Media-FirstMoment/Just%20Born.jpeg',  caption: 'Just Born 🌟' },
+  { src: 'Media-FirstMoment/1%20month.jpeg',    caption: '1 Month 🌸' },
+  { src: 'Media-FirstMoment/2%20month.jpeg',    caption: '2 Months 🌸' },
+  { src: 'Media-FirstMoment/3%20month.jpeg',    caption: '3 Months 🌸' },
+  { src: 'Media-FirstMoment/4%20month.jpeg',    caption: '4 Months 🌸' },
+  { src: 'Media-FirstMoment/5%20month.jpeg',    caption: '5 Months 🌸' },
+  { src: 'Media-FirstMoment/6%20month.jpeg',    caption: '6 Months 🌸' },
+  { src: 'Media-FirstMoment/7%20month.jpeg',    caption: '7 Months 🌸' },
+  { src: 'Media-FirstMoment/8%20month.jpeg',    caption: '8 Months 🌸' },
+  { src: 'Media-FirstMoment/9%20month.jpeg',    caption: '9 Months 🌸' },
+  { src: 'Media-FirstMoment/10%20month.jpeg',   caption: '10 Months 🌸' },
+  { src: 'Media-FirstMoment/11%20month.jpeg',   caption: '11 Months 🌸' },
+];
+
+function openFirstMoments() {
+  lbItems = firstMomentPhotos.map(p => ({
+    dataset: { type: 'image', src: p.src, caption: p.caption }
+  }));
+  lbIdx = 0;
+  renderLB();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ---- Little Adventures gallery (all 17 photos) ----
+const littleAdventuresPhotos = [
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.53%20PM%20(1).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.53%20PM.jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.54%20PM%20(1).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.54%20PM%20(2).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.54%20PM%20(3).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.54%20PM%20(4).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.54%20PM%20(5).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.54%20PM%20(6).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.54%20PM.jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.55%20PM%20(1).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.55%20PM%20(2).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.55%20PM%20(3).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.55%20PM%20(4).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.55%20PM%20(5).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.55%20PM.jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.56%20PM%20(1).jpeg',
+  'Media-Photos/WhatsApp%20Image%202026-04-21%20at%204.30.56%20PM.jpeg'
+];
+
+function openLittleAdventures() {
+  lbItems = littleAdventuresPhotos.map(src => ({
+    dataset: { type: 'image', src: src, caption: 'Little Adventures' }
+  }));
+  lbIdx = 0;
+  renderLB();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ---- Love letter reveal ----
+const letterBody = document.getElementById('letterBody');
+new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) letterBody.classList.add('visible');
+}, {threshold:.3}).observe(letterBody);
+
+// ---- Days counter ----
+// REPLACE DATE: Change new Date(YYYY, MM-1, DD) to your wedding/anniversary date
+// Month is 0-indexed: Jan=0, Feb=1, Mar=2 ... Sep=8, Oct=9 ...
+function startCounter() {
+  const start = new Date(2023, 4, 13); // May 13, 2023
+  const days = Math.floor((Date.now()-start)/(864e5));
+  const el = document.getElementById('dayCounter');
+  let cur = 0;
+  const step = Math.ceil(days/80);
+  const t = setInterval(() => {
+    cur = Math.min(cur+step, days);
+    el.textContent = cur.toLocaleString();
+    if (cur>=days) clearInterval(t);
+  }, 18);
+}
+
+new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { startCounter(); }
+}, {threshold:.3}).observe(document.getElementById('footer'));
+
+// ---- Smooth scroll for all anchor links ----
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+</body>
+</html>
