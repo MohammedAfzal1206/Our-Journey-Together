@@ -743,7 +743,7 @@ my most beautiful dream come true. ❤️</p><!-- REPLACE -->
 
     <!-- OPTION B: Local video -->
     <div class="local-vid-wrap">
-      <video controls playsinline
+      <video autoplay muted loop playsinline controls
              style="width:100%;display:block;border-radius:22px;">
         <source src="Media-Video/WhatsApp%20Video%202026-04-27%20at%208.50.10%20PM.mp4" type="video/mp4">
       </video>
@@ -1008,6 +1008,16 @@ document.addEventListener('keydown', e => {
   if (e.key==='ArrowRight') lbNav(1);
   if (e.key==='ArrowLeft') lbNav(-1);
 });
+
+// Touch swipe for lightbox
+let _lbTouchX = 0;
+document.getElementById('lightbox').addEventListener('touchstart', e => {
+  _lbTouchX = e.touches[0].clientX;
+}, { passive: true });
+document.getElementById('lightbox').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - _lbTouchX;
+  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+}, { passive: true });
 
 // ---- Timeline video modal ----
 function openVModal(src) {
