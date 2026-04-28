@@ -982,7 +982,7 @@ function renderLB() {
   } else if (type === 'youtube') {
     inner.innerHTML = `<div class="lb-vid"><iframe src="https://www.youtube.com/embed/${src}?autoplay=1&rel=0" allow="autoplay;encrypted-media" allowfullscreen></iframe></div>`;
   } else if (type === 'video') {
-    inner.innerHTML = `<div class="lb-vid"><video src="${src}" controls autoplay></video></div>`;
+    inner.innerHTML = `<div class="lb-vid"><video src="${src}" controls autoplay muted playsinline></video></div>`;
   }
 }
 
