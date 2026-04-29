@@ -296,65 +296,82 @@ section{padding:6rem 2rem}
    ============================================== */
 #intro-overlay{
   position:fixed;inset:0;z-index:99999;
-  background:linear-gradient(160deg,#2a0c1c 0%,#5c1a35 38%,#8c2d52 65%,#3b0e20 100%);
+  background:linear-gradient(160deg,#1e0814 0%,#4a1228 38%,#7a2045 65%,#2e0c1a 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:2rem;text-align:center;overflow:hidden;
   transition:opacity 1.5s cubic-bezier(.4,0,.2,1);
 }
 #intro-overlay::after{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.6) 100%);
+  background:radial-gradient(ellipse at center,transparent 28%,rgba(0,0,0,.65) 100%);
   pointer-events:none;
 }
 #intro-overlay.fade-out{opacity:0;pointer-events:none}
 
-/* ---- ECG section ---- */
-.intro-ecg-section{
+/* ---- heart wrapper (enter transition) ---- */
+.intro-heart-wrap{
   position:relative;z-index:2;
-  display:flex;flex-direction:column;align-items:center;gap:.9rem;
-  margin-bottom:2rem;
-  opacity:0;transform:translateY(10px);
-  transition:opacity .9s ease,transform .9s ease;
+  width:92px;height:92px;
+  margin-bottom:2.2rem;
+  opacity:0;transform:scale(.12);
+  transition:opacity .85s ease,transform .85s cubic-bezier(.34,1.56,.64,1);
 }
-.intro-ecg-section.visible{opacity:1;transform:translateY(0)}
+.intro-heart-wrap.enter{opacity:1;transform:scale(1)}
+.intro-heart-svg{width:100%;height:100%}
 
-/* small static heart above ECG line */
-.intro-heart-sm{
-  width:38px;height:38px;
-  filter:drop-shadow(0 0 10px rgba(255,110,150,.85)) drop-shadow(0 0 26px rgba(200,40,80,.55));
+/* ---- double-beat shape ---- */
+@keyframes hbBeat{
+  0%   {transform:scale(1,1)}
+  8%   {transform:scale(1.27,1.18)}   /* LUB  */
+  17%  {transform:scale(.95,1.02)}    /* dip  */
+  26%  {transform:scale(1.14,1.09)}   /* DUB  */
+  36%  {transform:scale(1,1)}         /* settle */
+  100% {transform:scale(1,1)}
 }
-.intro-heart-sm svg{width:100%;height:100%}
 
-/* ECG track */
-.intro-ecg-wrap{
-  position:relative;
-  width:min(320px,80vw);
-  overflow:hidden;
+/* ---- glow per phase (same beat %, different intensity) ---- */
+@keyframes hbGlow1{
+  0%,36%,100%{filter:drop-shadow(0 0  8px rgba(200,18,50,.5)) drop-shadow(0 0 20px rgba(175,10,44,.3))}
+  8%         {filter:drop-shadow(0 0 22px rgba(235,30,65,.8)) drop-shadow(0 0 44px rgba(205,15,52,.52))}
+  26%        {filter:drop-shadow(0 0 14px rgba(218,24,57,.64))drop-shadow(0 0 30px rgba(190,12,48,.4))}
 }
-/* left & right fade — like Apple Watch dark edges */
-.intro-ecg-wrap::before,
-.intro-ecg-wrap::after{
-  content:'';position:absolute;top:0;bottom:0;width:52px;z-index:2;pointer-events:none;
+@keyframes hbGlow2{
+  0%,36%,100%{filter:drop-shadow(0 0 12px rgba(215,20,54,.62))drop-shadow(0 0 28px rgba(188,12,47,.42))}
+  8%         {filter:drop-shadow(0 0 32px rgba(248,36,74,.9)) drop-shadow(0 0 60px rgba(218,18,57,.62))}
+  26%        {filter:drop-shadow(0 0 22px rgba(232,28,66,.74))drop-shadow(0 0 44px rgba(204,14,52,.54))}
 }
-.intro-ecg-wrap::before{left:0; background:linear-gradient(to right,#3b0e20,transparent)}
-.intro-ecg-wrap::after {right:0;background:linear-gradient(to left, #3b0e20,transparent)}
+@keyframes hbGlow3{
+  0%,36%,100%{filter:drop-shadow(0 0 18px rgba(225,24,60,.72))drop-shadow(0 0 42px rgba(198,14,52,.54))}
+  8%         {filter:drop-shadow(0 0 44px rgba(255,38,80,.98))drop-shadow(0 0 82px rgba(228,22,64,.76))}
+  26%        {filter:drop-shadow(0 0 30px rgba(248,33,72,.86))drop-shadow(0 0 58px rgba(216,18,58,.68))}
+}
 
-.intro-ecg-svg{
-  display:block;width:200%;
-  animation:ecgScroll 2.1s linear infinite;
+/* phase classes — added to .intro-heart-wrap by JS */
+.hb-phase1 .intro-heart-svg{animation:hbBeat 1.35s ease-in-out infinite,hbGlow1 1.35s ease-in-out infinite}
+.hb-phase2 .intro-heart-svg{animation:hbBeat  .92s ease-in-out infinite,hbGlow2  .92s ease-in-out infinite}
+.hb-phase3 .intro-heart-svg{animation:hbBeat  .65s ease-in-out infinite,hbGlow3  .65s ease-in-out infinite}
+
+/* ---- ripple rings ---- */
+.intro-heart-ring{
+  position:absolute;
+  top:50%;left:50%;
+  width:92px;height:92px;
+  margin:-46px 0 0 -46px;
+  border-radius:50%;
+  border:1.5px solid rgba(220,38,68,.28);
+  opacity:0;
+  animation:hbRing 1.35s ease-out infinite;
+  pointer-events:none;
 }
-@keyframes ecgScroll{
-  from{transform:translateX(0)}
-  to  {transform:translateX(-50%)}
+.intro-heart-ring:nth-child(2){animation-delay:.28s}
+@keyframes hbRing{
+  0%  {transform:scale(.72);opacity:0}
+  8%  {opacity:.48}
+  100%{transform:scale(1.8);opacity:0}
 }
-.intro-ecg-line{
-  fill:none;
-  stroke:#ff8fab;
-  stroke-width:2.6;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  filter:drop-shadow(0 0 3px rgba(255,100,145,.9)) drop-shadow(0 0 9px rgba(255,80,130,.65));
-}
+.hb-phase1 .intro-heart-ring{animation-duration:1.35s}
+.hb-phase2 .intro-heart-ring{animation-duration: .92s}
+.hb-phase3 .intro-heart-ring{animation-duration: .65s}
 
 /* ---- text ---- */
 .intro-msg{
@@ -394,8 +411,8 @@ section{padding:6rem 2rem}
 }
 @keyframes introRise{
   0%  {transform:translateY(0) scale(1) rotate(-8deg);opacity:0}
-  6%  {opacity:.28}
-  88% {opacity:.1}
+  6%  {opacity:.25}
+  88% {opacity:.08}
   100%{transform:translateY(-110vh) scale(1.2) rotate(14deg);opacity:0}
 }
 </style>
@@ -404,40 +421,19 @@ section{padding:6rem 2rem}
 
 <div id="intro-overlay" role="dialog" aria-modal="true" aria-label="Opening message">
 
-  <div class="intro-ecg-section" id="introEcg">
-
-    <!-- small glowing heart above the line -->
-    <div class="intro-heart-sm">
-      <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="hg" x1="50" y1="0" x2="50" y2="90" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#ff8fab"/>
-            <stop offset="100%" stop-color="#c9184a"/>
-          </linearGradient>
-        </defs>
-        <path d="M50 85 C50 85 5 52 5 28 C5 13 16 3 28 3 C37 3 45 8 50 16 C55 8 63 3 72 3 C84 3 95 13 95 28 C95 52 50 85 50 85Z"
-              fill="url(#hg)" stroke="rgba(255,160,190,.3)" stroke-width="1.5"/>
-      </svg>
-    </div>
-
-    <!-- ECG heartbeat line — two identical cycles for seamless loop -->
-    <div class="intro-ecg-wrap">
-      <svg class="intro-ecg-svg" viewBox="0 0 800 70" preserveAspectRatio="none"
-           xmlns="http://www.w3.org/2000/svg">
-        <polyline class="intro-ecg-line" points="
-          0,35
-          55,35  65,31  72,35
-          90,35  97,3  104,67  111,35
-          121,24  145,35
-          400,35
-          455,35  465,31  472,35
-          490,35  497,3  504,67  511,35
-          521,24  545,35
-          800,35
-        "/>
-      </svg>
-    </div>
-
+  <div class="intro-heart-wrap" id="introHeart">
+    <div class="intro-heart-ring"></div>
+    <div class="intro-heart-ring"></div>
+    <svg class="intro-heart-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hg" x1="50" y1="0" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#e8385a"/>
+          <stop offset="100%" stop-color="#9b0a2e"/>
+        </linearGradient>
+      </defs>
+      <path d="M50 85 C50 85 5 52 5 28 C5 13 16 3 28 3 C37 3 45 8 50 16 C55 8 63 3 72 3 C84 3 95 13 95 28 C95 52 50 85 50 85Z"
+            fill="url(#hg)"/>
+    </svg>
   </div>
 
   <p id="intro-msg1" class="intro-msg">Before you see anything…</p>
@@ -1416,10 +1412,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ---- Cinematic intro ----
+// ---- Cinematic heartbeat intro ----
 (function () {
   const overlay = document.getElementById('intro-overlay');
-  const ecg     = document.getElementById('introEcg');
+  const heart   = document.getElementById('introHeart');
   const msg1    = document.getElementById('intro-msg1');
   const msg2    = document.getElementById('intro-msg2');
   const divider = document.getElementById('intro-divider');
@@ -1440,15 +1436,24 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     overlay.appendChild(el);
   }
 
-  // Cinematic sequence
-  setTimeout(() => ecg.classList.add('visible'),     300);   // heart + ECG line appears
-  setTimeout(() => msg1.classList.add('visible'),    1500);  // first line
-  setTimeout(() => divider.classList.add('visible'), 2500);  // divider draws
-  setTimeout(() => msg2.classList.add('visible'),    3000);  // second line
+  // Switch beat phase (removes old, adds new)
+  function phase(n) {
+    heart.classList.remove('hb-phase1','hb-phase2','hb-phase3');
+    heart.classList.add('hb-phase' + n);
+  }
 
-  // Fade out & destroy
-  setTimeout(() => overlay.classList.add('fade-out'), 5600);
-  setTimeout(() => overlay.remove(),                  7200);
+  // Cinematic sequence
+  setTimeout(() => heart.classList.add('enter'), 400);  // spring in
+  setTimeout(() => phase(1),                     800);  // slow, soft beats
+  setTimeout(() => msg1.classList.add('visible'),1600); // "Before you see anything…"
+  setTimeout(() => phase(2),                     2200); // pace builds
+  setTimeout(() => divider.classList.add('visible'),2700);
+  setTimeout(() => msg2.classList.add('visible'),3100); // "This was made with all my love…"
+  setTimeout(() => phase(3),                     4100); // peak intensity + glow
+
+  // Exit
+  setTimeout(() => overlay.classList.add('fade-out'), 5800);
+  setTimeout(() => overlay.remove(),                  7400);
 }());
 </script>
 </body>
