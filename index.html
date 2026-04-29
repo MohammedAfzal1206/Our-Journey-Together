@@ -1012,13 +1012,21 @@ document.addEventListener('keydown', e => {
 });
 
 // Touch swipe for lightbox
-let _lbTouchX = 0;
+let _lbTouchX = 0, _lbTouchY = 0, _lbPinching = false;
 document.getElementById('lightbox').addEventListener('touchstart', e => {
+  _lbPinching = e.touches.length > 1;
+  if (_lbPinching) return;
   _lbTouchX = e.touches[0].clientX;
+  _lbTouchY = e.touches[0].clientY;
+}, { passive: true });
+document.getElementById('lightbox').addEventListener('touchmove', e => {
+  if (e.touches.length > 1) _lbPinching = true;
 }, { passive: true });
 document.getElementById('lightbox').addEventListener('touchend', e => {
+  if (_lbPinching) { _lbPinching = false; return; }
   const dx = e.changedTouches[0].clientX - _lbTouchX;
-  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+  const dy = e.changedTouches[0].clientY - _lbTouchY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
 }, { passive: true });
 
 // ---- Timeline video modal ----
