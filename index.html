@@ -291,9 +291,58 @@ section{padding:6rem 2rem}
   .fam-card{flex:0 0 100%;min-width:unset;max-width:unset}
   section{padding:4rem 1rem}
 }
+/* ==============================================
+   INTRO OVERLAY
+   ============================================== */
+#intro-overlay{
+  position:fixed;inset:0;z-index:99999;
+  background:linear-gradient(135deg,#fff0f4 0%,#fce4ec 45%,#fdf6f0 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.8rem;padding:2.5rem;text-align:center;
+  transition:opacity 1.1s ease;
+  overflow:hidden;
+}
+#intro-overlay.fade-out{opacity:0;pointer-events:none}
+.intro-msg{
+  font-family:var(--ff-script);
+  color:var(--brown-dark);
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity 1s ease, transform 1s ease;
+  max-width:540px;
+  line-height:1.75;
+}
+.intro-msg.visible{opacity:1;transform:translateY(0)}
+#intro-msg1{font-size:clamp(1.15rem,4vw,1.55rem)}
+#intro-msg2{font-size:clamp(1rem,3.5vw,1.3rem);color:var(--deep-rose);font-style:italic}
+.intro-divider{
+  width:0;height:1px;
+  background:linear-gradient(to right,transparent,var(--rose),transparent);
+  transition:width 1s ease;
+}
+.intro-divider.visible{width:80px}
+.intro-heart{
+  position:absolute;
+  pointer-events:none;
+  user-select:none;
+  animation:introFloat linear infinite;
+  opacity:0;
+}
+@keyframes introFloat{
+  0%  {transform:translateY(0) rotate(-10deg);opacity:0}
+  8%  {opacity:.45}
+  85% {opacity:.2}
+  100%{transform:translateY(-105vh) rotate(15deg);opacity:0}
+}
 </style>
 </head>
 <body>
+
+<div id="intro-overlay" role="dialog" aria-modal="true" aria-label="Intro message">
+  <p id="intro-msg1" class="intro-msg">Before you see anything… just know this was made with all my love, only for you ❤️</p>
+  <div class="intro-divider" id="intro-divider"></div>
+  <p id="intro-msg2" class="intro-msg">Every moment here… is a piece of my heart</p>
+</div>
 
 <!-- Floating hearts layer -->
 <div class="hearts-wrap" id="heartsWrap"></div>
@@ -1264,6 +1313,39 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
   });
 });
+
+// ---- Intro overlay ----
+(function(){
+  const overlay  = document.getElementById('intro-overlay');
+  const msg1     = document.getElementById('intro-msg1');
+  const msg2     = document.getElementById('intro-msg2');
+  const divider  = document.getElementById('intro-divider');
+
+  // Floating hearts — generated so HTML stays clean
+  const symbols = ['❤️','💕','💗','🌸','✨','💖','🌷','💞'];
+  for (let i = 0; i < 9; i++) {
+    const h = document.createElement('span');
+    h.className = 'intro-heart';
+    h.textContent = symbols[i % symbols.length];
+    h.style.cssText = [
+      `left:${5 + Math.random() * 90}%`,
+      `bottom:-2rem`,
+      `font-size:${0.85 + Math.random() * 1.1}rem`,
+      `animation-delay:${(Math.random() * 3.5).toFixed(2)}s`,
+      `animation-duration:${(4.5 + Math.random() * 3).toFixed(2)}s`
+    ].join(';');
+    overlay.appendChild(h);
+  }
+
+  // Sequential reveal
+  setTimeout(() => msg1.classList.add('visible'),    500);
+  setTimeout(() => divider.classList.add('visible'), 1800);
+  setTimeout(() => msg2.classList.add('visible'),    2600);
+
+  // Fade out and remove
+  setTimeout(() => overlay.classList.add('fade-out'), 4900);
+  setTimeout(() => overlay.remove(),                  6100);
+})();
 </script>
 </body>
 </html>
