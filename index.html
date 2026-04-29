@@ -308,26 +308,52 @@ section{padding:6rem 2rem}
 }
 #intro-overlay.fade-out{opacity:0;pointer-events:none}
 
-/* ---- glowing heart ---- */
-.intro-heart-icon{
+/* ---- ECG section ---- */
+.intro-ecg-section{
   position:relative;z-index:2;
-  width:78px;height:78px;
+  display:flex;flex-direction:column;align-items:center;gap:.9rem;
   margin-bottom:2rem;
-  opacity:0;transform:scale(.3);
-  transition:opacity .9s ease,transform .9s cubic-bezier(.34,1.56,.64,1);
-  filter:drop-shadow(0 0 18px rgba(255,110,150,.75)) drop-shadow(0 0 42px rgba(200,40,80,.45));
+  opacity:0;transform:translateY(10px);
+  transition:opacity .9s ease,transform .9s ease;
 }
-.intro-heart-icon.visible{
-  opacity:1;transform:scale(1);
-  animation:iHeartbeat 1.5s ease-in-out infinite .9s;
+.intro-ecg-section.visible{opacity:1;transform:translateY(0)}
+
+/* small static heart above ECG line */
+.intro-heart-sm{
+  width:38px;height:38px;
+  filter:drop-shadow(0 0 10px rgba(255,110,150,.85)) drop-shadow(0 0 26px rgba(200,40,80,.55));
 }
-@keyframes iHeartbeat{
-  0%  {transform:scale(1);   filter:drop-shadow(0 0 16px rgba(255,110,150,.75)) drop-shadow(0 0 38px rgba(200,40,80,.4))}
-  14% {transform:scale(1.22);filter:drop-shadow(0 0 30px rgba(255,140,170,.95)) drop-shadow(0 0 60px rgba(220,50,90,.65))}
-  28% {transform:scale(1);   filter:drop-shadow(0 0 16px rgba(255,110,150,.75)) drop-shadow(0 0 38px rgba(200,40,80,.4))}
-  44% {transform:scale(1.11);filter:drop-shadow(0 0 22px rgba(255,130,165,.85)) drop-shadow(0 0 48px rgba(210,45,85,.52))}
-  70% {transform:scale(1);   filter:drop-shadow(0 0 16px rgba(255,110,150,.75)) drop-shadow(0 0 38px rgba(200,40,80,.4))}
-  100%{transform:scale(1)}
+.intro-heart-sm svg{width:100%;height:100%}
+
+/* ECG track */
+.intro-ecg-wrap{
+  position:relative;
+  width:min(320px,80vw);
+  overflow:hidden;
+}
+/* left & right fade — like Apple Watch dark edges */
+.intro-ecg-wrap::before,
+.intro-ecg-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:52px;z-index:2;pointer-events:none;
+}
+.intro-ecg-wrap::before{left:0; background:linear-gradient(to right,#3b0e20,transparent)}
+.intro-ecg-wrap::after {right:0;background:linear-gradient(to left, #3b0e20,transparent)}
+
+.intro-ecg-svg{
+  display:block;width:200%;
+  animation:ecgScroll 2.1s linear infinite;
+}
+@keyframes ecgScroll{
+  from{transform:translateX(0)}
+  to  {transform:translateX(-50%)}
+}
+.intro-ecg-line{
+  fill:none;
+  stroke:#ff8fab;
+  stroke-width:2.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 3px rgba(255,100,145,.9)) drop-shadow(0 0 9px rgba(255,80,130,.65));
 }
 
 /* ---- text ---- */
@@ -378,17 +404,40 @@ section{padding:6rem 2rem}
 
 <div id="intro-overlay" role="dialog" aria-modal="true" aria-label="Opening message">
 
-  <div class="intro-heart-icon" id="introHeart">
-    <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="hg" x1="50" y1="0" x2="50" y2="90" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#ff8fab"/>
-          <stop offset="100%" stop-color="#c9184a"/>
-        </linearGradient>
-      </defs>
-      <path d="M50 85 C50 85 5 52 5 28 C5 13 16 3 28 3 C37 3 45 8 50 16 C55 8 63 3 72 3 C84 3 95 13 95 28 C95 52 50 85 50 85Z"
-            fill="url(#hg)" stroke="rgba(255,160,190,.35)" stroke-width="1.5"/>
-    </svg>
+  <div class="intro-ecg-section" id="introEcg">
+
+    <!-- small glowing heart above the line -->
+    <div class="intro-heart-sm">
+      <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hg" x1="50" y1="0" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ff8fab"/>
+            <stop offset="100%" stop-color="#c9184a"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 85 C50 85 5 52 5 28 C5 13 16 3 28 3 C37 3 45 8 50 16 C55 8 63 3 72 3 C84 3 95 13 95 28 C95 52 50 85 50 85Z"
+              fill="url(#hg)" stroke="rgba(255,160,190,.3)" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <!-- ECG heartbeat line — two identical cycles for seamless loop -->
+    <div class="intro-ecg-wrap">
+      <svg class="intro-ecg-svg" viewBox="0 0 800 70" preserveAspectRatio="none"
+           xmlns="http://www.w3.org/2000/svg">
+        <polyline class="intro-ecg-line" points="
+          0,35
+          55,35  65,31  72,35
+          90,35  97,3  104,67  111,35
+          121,24  145,35
+          400,35
+          455,35  465,31  472,35
+          490,35  497,3  504,67  511,35
+          521,24  545,35
+          800,35
+        "/>
+      </svg>
+    </div>
+
   </div>
 
   <p id="intro-msg1" class="intro-msg">Before you see anything…</p>
@@ -1370,7 +1419,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ---- Cinematic intro ----
 (function () {
   const overlay = document.getElementById('intro-overlay');
-  const heart   = document.getElementById('introHeart');
+  const ecg     = document.getElementById('introEcg');
   const msg1    = document.getElementById('intro-msg1');
   const msg2    = document.getElementById('intro-msg2');
   const divider = document.getElementById('intro-divider');
@@ -1392,7 +1441,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   }
 
   // Cinematic sequence
-  setTimeout(() => heart.classList.add('visible'),   300);   // heart appears
+  setTimeout(() => ecg.classList.add('visible'),     300);   // heart + ECG line appears
   setTimeout(() => msg1.classList.add('visible'),    1500);  // first line
   setTimeout(() => divider.classList.add('visible'), 2500);  // divider draws
   setTimeout(() => msg2.classList.add('visible'),    3000);  // second line
