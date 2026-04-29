@@ -114,7 +114,7 @@ section{padding:6rem 2rem}
 .tl-item:hover .tl-dot{transform:translateX(-50%) scale(1.5)}
 .tl-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 28px var(--shadow);max-width:420px;width:100%;transition:var(--ease)}
 .tl-card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(196,104,122,.28)}
-.tl-img-wrap{overflow:hidden;position:relative;aspect-ratio:1/1}
+.tl-img-wrap{overflow:hidden;position:relative;aspect-ratio:4/3}
 /* REPLACE: Timeline images are set via src on <img> tags below */
 .tl-img{width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform .6s ease;display:block}
 .tl-card:hover .tl-img{transform:scale(1.06)}
@@ -280,6 +280,7 @@ section{padding:6rem 2rem}
   .tl-item,.tl-item:nth-child(even){padding:0 0 0 3.8rem;justify-content:flex-start}
   .tl-dot,.tl-item:nth-child(even) .tl-dot{left:1.4rem}
   .tl-card{max-width:100%}
+  .tl-img-wrap{aspect-ratio:1/1}
   .gallery-grid{columns:2}
   .fam-card{flex:0 0 calc(50% - .75rem);max-width:unset}
   .letter-wrap{padding:2rem 1.5rem}
