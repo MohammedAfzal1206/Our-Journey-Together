@@ -292,56 +292,109 @@ section{padding:6rem 2rem}
   section{padding:4rem 1rem}
 }
 /* ==============================================
-   INTRO OVERLAY
+   CINEMATIC INTRO
    ============================================== */
 #intro-overlay{
   position:fixed;inset:0;z-index:99999;
-  background:linear-gradient(135deg,#fff0f4 0%,#fce4ec 45%,#fdf6f0 100%);
+  background:linear-gradient(160deg,#2a0c1c 0%,#5c1a35 38%,#8c2d52 65%,#3b0e20 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1.8rem;padding:2.5rem;text-align:center;
-  transition:opacity 1.1s ease;
-  overflow:hidden;
+  padding:2rem;text-align:center;overflow:hidden;
+  transition:opacity 1.5s cubic-bezier(.4,0,.2,1);
+}
+#intro-overlay::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.6) 100%);
+  pointer-events:none;
 }
 #intro-overlay.fade-out{opacity:0;pointer-events:none}
+
+/* ---- glowing heart ---- */
+.intro-heart-icon{
+  position:relative;z-index:2;
+  width:78px;height:78px;
+  margin-bottom:2rem;
+  opacity:0;transform:scale(.3);
+  transition:opacity .9s ease,transform .9s cubic-bezier(.34,1.56,.64,1);
+  filter:drop-shadow(0 0 18px rgba(255,110,150,.75)) drop-shadow(0 0 42px rgba(200,40,80,.45));
+}
+.intro-heart-icon.visible{
+  opacity:1;transform:scale(1);
+  animation:iHeartbeat 1.5s ease-in-out infinite .9s;
+}
+@keyframes iHeartbeat{
+  0%  {transform:scale(1);   filter:drop-shadow(0 0 16px rgba(255,110,150,.75)) drop-shadow(0 0 38px rgba(200,40,80,.4))}
+  14% {transform:scale(1.22);filter:drop-shadow(0 0 30px rgba(255,140,170,.95)) drop-shadow(0 0 60px rgba(220,50,90,.65))}
+  28% {transform:scale(1);   filter:drop-shadow(0 0 16px rgba(255,110,150,.75)) drop-shadow(0 0 38px rgba(200,40,80,.4))}
+  44% {transform:scale(1.11);filter:drop-shadow(0 0 22px rgba(255,130,165,.85)) drop-shadow(0 0 48px rgba(210,45,85,.52))}
+  70% {transform:scale(1);   filter:drop-shadow(0 0 16px rgba(255,110,150,.75)) drop-shadow(0 0 38px rgba(200,40,80,.4))}
+  100%{transform:scale(1)}
+}
+
+/* ---- text ---- */
 .intro-msg{
   font-family:var(--ff-script);
-  color:var(--brown-dark);
-  opacity:0;
-  transform:translateY(12px);
-  transition:opacity 1s ease, transform 1s ease;
-  max-width:540px;
-  line-height:1.75;
+  opacity:0;transform:translateY(18px);
+  transition:opacity 1.1s ease,transform 1.1s ease;
+  line-height:1.8;position:relative;z-index:2;
+  text-shadow:0 2px 22px rgba(0,0,0,.45);
+  max-width:560px;
 }
 .intro-msg.visible{opacity:1;transform:translateY(0)}
-#intro-msg1{font-size:clamp(1.15rem,4vw,1.55rem)}
-#intro-msg2{font-size:clamp(1rem,3.5vw,1.3rem);color:var(--deep-rose);font-style:italic}
+#intro-msg1{
+  font-size:clamp(1rem,3.8vw,1.4rem);
+  color:rgba(255,210,228,.85);
+  letter-spacing:.04em;
+  margin-bottom:.5rem;
+}
+#intro-msg2{
+  font-size:clamp(1.2rem,5vw,1.7rem);
+  color:#fff;font-weight:600;
+}
+
+/* ---- divider ---- */
 .intro-divider{
   width:0;height:1px;
-  background:linear-gradient(to right,transparent,var(--rose),transparent);
-  transition:width 1s ease;
+  background:linear-gradient(to right,transparent,rgba(255,180,210,.55),transparent);
+  transition:width 1.2s ease;
+  margin:.4rem auto 1rem;
+  position:relative;z-index:2;
 }
-.intro-divider.visible{width:80px}
-.intro-heart{
-  position:absolute;
-  pointer-events:none;
-  user-select:none;
-  animation:introFloat linear infinite;
-  opacity:0;
+.intro-divider.visible{width:110px}
+
+/* ---- floating micro-hearts ---- */
+.intro-fh{
+  position:absolute;pointer-events:none;user-select:none;opacity:0;
+  animation:introRise linear infinite;
 }
-@keyframes introFloat{
-  0%  {transform:translateY(0) rotate(-10deg);opacity:0}
-  8%  {opacity:.45}
-  85% {opacity:.2}
-  100%{transform:translateY(-105vh) rotate(15deg);opacity:0}
+@keyframes introRise{
+  0%  {transform:translateY(0) scale(1) rotate(-8deg);opacity:0}
+  6%  {opacity:.28}
+  88% {opacity:.1}
+  100%{transform:translateY(-110vh) scale(1.2) rotate(14deg);opacity:0}
 }
 </style>
 </head>
 <body>
 
-<div id="intro-overlay" role="dialog" aria-modal="true" aria-label="Intro message">
-  <p id="intro-msg1" class="intro-msg">Before you see anything… just know this was made with all my love, only for you ❤️</p>
+<div id="intro-overlay" role="dialog" aria-modal="true" aria-label="Opening message">
+
+  <div class="intro-heart-icon" id="introHeart">
+    <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hg" x1="50" y1="0" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#ff8fab"/>
+          <stop offset="100%" stop-color="#c9184a"/>
+        </linearGradient>
+      </defs>
+      <path d="M50 85 C50 85 5 52 5 28 C5 13 16 3 28 3 C37 3 45 8 50 16 C55 8 63 3 72 3 C84 3 95 13 95 28 C95 52 50 85 50 85Z"
+            fill="url(#hg)" stroke="rgba(255,160,190,.35)" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <p id="intro-msg1" class="intro-msg">Before you see anything…</p>
   <div class="intro-divider" id="intro-divider"></div>
-  <p id="intro-msg2" class="intro-msg">Every moment here… is a piece of my heart</p>
+  <p id="intro-msg2" class="intro-msg">This was made with all my love… only for you ❤️</p>
+
 </div>
 
 <!-- Floating hearts layer -->
@@ -1314,38 +1367,40 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ---- Intro overlay ----
-(function(){
-  const overlay  = document.getElementById('intro-overlay');
-  const msg1     = document.getElementById('intro-msg1');
-  const msg2     = document.getElementById('intro-msg2');
-  const divider  = document.getElementById('intro-divider');
+// ---- Cinematic intro ----
+(function () {
+  const overlay = document.getElementById('intro-overlay');
+  const heart   = document.getElementById('introHeart');
+  const msg1    = document.getElementById('intro-msg1');
+  const msg2    = document.getElementById('intro-msg2');
+  const divider = document.getElementById('intro-divider');
 
-  // Floating hearts — generated so HTML stays clean
-  const symbols = ['❤️','💕','💗','🌸','✨','💖','🌷','💞'];
-  for (let i = 0; i < 9; i++) {
-    const h = document.createElement('span');
-    h.className = 'intro-heart';
-    h.textContent = symbols[i % symbols.length];
-    h.style.cssText = [
-      `left:${5 + Math.random() * 90}%`,
+  // Spawn floating micro-hearts
+  const sym = ['❤️','💕','🌸','💗','✨','💖','🌷','💞'];
+  for (let i = 0; i < 12; i++) {
+    const el = document.createElement('span');
+    el.className = 'intro-fh';
+    el.textContent = sym[i % sym.length];
+    el.style.cssText = [
+      `left:${3 + Math.random() * 94}%`,
       `bottom:-2rem`,
-      `font-size:${0.85 + Math.random() * 1.1}rem`,
-      `animation-delay:${(Math.random() * 3.5).toFixed(2)}s`,
-      `animation-duration:${(4.5 + Math.random() * 3).toFixed(2)}s`
+      `font-size:${0.65 + Math.random() * 1}rem`,
+      `animation-delay:${(Math.random() * 4.5).toFixed(2)}s`,
+      `animation-duration:${(5.5 + Math.random() * 4).toFixed(2)}s`
     ].join(';');
-    overlay.appendChild(h);
+    overlay.appendChild(el);
   }
 
-  // Sequential reveal
-  setTimeout(() => msg1.classList.add('visible'),    500);
-  setTimeout(() => divider.classList.add('visible'), 1800);
-  setTimeout(() => msg2.classList.add('visible'),    2600);
+  // Cinematic sequence
+  setTimeout(() => heart.classList.add('visible'),   300);   // heart appears
+  setTimeout(() => msg1.classList.add('visible'),    1500);  // first line
+  setTimeout(() => divider.classList.add('visible'), 2500);  // divider draws
+  setTimeout(() => msg2.classList.add('visible'),    3000);  // second line
 
-  // Fade out and remove
-  setTimeout(() => overlay.classList.add('fade-out'), 4900);
-  setTimeout(() => overlay.remove(),                  6100);
-})();
+  // Fade out & destroy
+  setTimeout(() => overlay.classList.add('fade-out'), 5600);
+  setTimeout(() => overlay.remove(),                  7200);
+}());
 </script>
 </body>
 </html>
