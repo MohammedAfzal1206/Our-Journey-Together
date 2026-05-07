@@ -1028,6 +1028,10 @@ my most beautiful dream come true. ❤️</p><!-- REPLACE -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+// ---- Always start at top on refresh ----
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 // ---- AOS ----
 AOS.init({ duration:800, easing:'ease-out-cubic', once:true, offset:70 });
 
